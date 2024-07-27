@@ -3,6 +3,8 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+LOG_FILE="/var/log/deploy.log"
+
 echo "Running composer install..."
 composer install --no-dev --working-dir=/var/www/html
 
