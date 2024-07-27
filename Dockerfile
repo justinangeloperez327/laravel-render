@@ -1,4 +1,4 @@
-FROM richarvey/nginx-php-fpm:1.7.2
+FROM richarvey/nginx-php-fpm:3.1.6
 
 COPY . .
 
@@ -14,7 +14,10 @@ ENV APP_ENV production
 ENV APP_DEBUG false
 ENV LOG_CHANNEL stderr
 
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
+
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-CMD ["/start.sh"]
+CMD ["sh", "-c", "/start.sh"]
