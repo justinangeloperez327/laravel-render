@@ -20,4 +20,19 @@ RUN composer install --no-dev --optimize-autoloader
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# Install Node.js and npm
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install npm dependencies
+RUN npm install
+
+# Build the project (if needed)
+# RUN npm run build
+
 CMD ["sh", "-c", "/start.sh"]
