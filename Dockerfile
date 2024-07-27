@@ -21,11 +21,7 @@ RUN composer install --no-dev --optimize-autoloader
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Install Node.js and npm
-RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
-
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
